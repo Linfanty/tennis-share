@@ -1,0 +1,48 @@
+html.share { --tabh: 0px; }
+html.share .top:has(> .back[href="#/"]:only-child) { display: none; }
+
+.sh-wrap {
+  position: fixed; inset: 0; z-index: 35;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(0, 0, 0, 0); transition: background .2s;
+}
+.sh-wrap.on { background: rgba(0, 0, 0, .4); }
+.sh-sheet {
+  width: 100%; max-height: 92vh; overflow: auto;
+  background: var(--card); color: var(--text);
+  border-radius: 16px 16px 0 0;
+  padding: 6px 20px calc(20px + env(safe-area-inset-bottom));
+  transform: translateY(100%); transition: transform .25s ease;
+}
+.sh-wrap.on .sh-sheet { transform: none; }
+.sh-head { display: flex; align-items: center; justify-content: space-between; min-height: 44px; font-size: 17px; }
+.sh-x { width: 44px; height: 44px; margin-right: -7px; border: 0; border-radius: 50%; background: radial-gradient(circle, var(--fill) 15px, transparent 15.5px); position: relative; cursor: pointer; }
+.sh-x::before, .sh-x::after { content: ""; position: absolute; left: 16px; right: 16px; top: 21px; border-top: 2px solid var(--muted); border-radius: 1px; }
+.sh-x::before { transform: rotate(45deg); }
+.sh-x::after { transform: rotate(-45deg); }
+.sh-body { display: flex; flex-direction: column; align-items: stretch; gap: 12px; padding-top: 8px; }
+.sh-prog { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 120px; color: var(--text2); }
+.sh-qr { align-self: center; width: 188px; height: 188px; padding: 10px; background: #fff; border-radius: 12px; }
+.sh-qr svg { width: 100%; height: 100%; }
+.sh-url { font-size: 15px; color: var(--fh); word-break: break-all; text-align: center; padding: 12px 0; margin: -12px 0; -webkit-user-select: all; user-select: all; }
+.sh-time { font-size: 13px; color: var(--muted); text-align: center; margin-top: -6px; }
+.sh-row { display: flex; gap: 12px; }
+.sh-row .btn { flex: 1; }
+.sh-stop { color: #c4262e; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sh-stop { color: #ff7b72; } }
+:root[data-theme="dark"] .sh-stop { color: #ff7b72; }
+.sh-err { text-align: center; color: var(--text2); padding: 20px 0 4px; }
+
+@media (min-width: 700px) {
+  .sh-wrap { align-items: center; }
+  .sh-sheet {
+    width: 400px; border-radius: 20px; padding: 12px 24px 24px;
+    transform: scale(.96); opacity: 0; transition: transform .2s ease, opacity .2s ease;
+  }
+  .sh-wrap.on .sh-sheet { transform: none; opacity: 1; }
+}
+
+@media (min-width: 900px) {
+  html.share body { padding-left: 0; }
+  html.share .toast { margin-left: 0; }
+}
